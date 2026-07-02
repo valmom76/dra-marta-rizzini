@@ -176,9 +176,8 @@ function useRevealOnScroll() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
+            // Apenas adiciona a classe uma vez, nunca remove
             entry.target.classList.add('is-visible');
-          } else {
-            entry.target.classList.remove('is-visible');
           }
         });
       },
@@ -227,34 +226,6 @@ function useActiveSection() {
   return active;
 }
 
-function replaySectionReveal(href: string) {
-  const section = document.querySelector(href) as HTMLElement | null; // Cast para HTMLElement
-  if (!section) return;
-
-  section.classList.remove('section-transition');
-  void section.offsetWidth; // Agora offsetWidth é reconhecido
-  section.classList.add('section-transition');
-
-  const revealElements = Array.from(
-    section.querySelectorAll('[data-reveal]')
-  ) as HTMLElement[]; // Cast para array de HTMLElement
-
-  revealElements.forEach((element, index) => {
-    element.classList.remove('is-visible', 'replay-reveal');
-    element.style.setProperty('--replay-delay', `${Math.min(index * 45, 260)}ms`); // style é válido
-    void element.offsetWidth;
-    element.classList.add('is-visible', 'replay-reveal');
-  });
-
-  window.setTimeout(() => {
-    section.classList.remove('section-transition');
-    revealElements.forEach((element) => {
-      element.classList.remove('replay-reveal');
-      element.style.removeProperty('--replay-delay');
-    });
-  }, 950);
-}
-
 function scrollToSection(href: string) {
   const section = document.querySelector(href);
   if (!section) return;
@@ -267,29 +238,10 @@ function scrollToSection(href: string) {
     ? 0
     : Math.max(sectionTop - headerOffset + SECTION_TOP_PADDING, 0);
 
-  const runTransition = () => replaySectionReveal(href);
-
   window.scrollTo({
     top: targetTop,
     behavior: prefersReducedMotion ? 'auto' : 'smooth',
   });
-
-  if (prefersReducedMotion) {
-    runTransition();
-    return;
-  }
-
-  let transitionStarted = false;
-
-  const startTransition = () => {
-    if (transitionStarted) return;
-    transitionStarted = true;
-    runTransition();
-    window.removeEventListener('scrollend', startTransition);
-  };
-
-  window.addEventListener('scrollend', startTransition, { once: true });
-  window.setTimeout(startTransition, 650);
 }
 
 function Header() {
@@ -356,7 +308,7 @@ function SectionTitle({ eyebrow, title, description, center = false }: SectionTi
   return (
     <div className={`section-title ${center ? 'center' : ''}`} data-reveal>
       {eyebrow && <span className="eyebrow">{eyebrow}</span>}
-      <h2>{title}</h2>
+      <h2 className="decorated-title">{title}</h2>
       {description && <p>{description}</p>}
     </div>
   );
@@ -391,6 +343,9 @@ function App() {
 
       <main>
         <section id="inicio" className="hero page-section">
+          <div className="hero-particles" aria-hidden="true">
+            <span /><span /><span /><span /><span /><span />
+          </div>
           <div className="hero-wash" />
           <div className="container hero-grid">
             <div className="hero-copy" data-reveal>
@@ -419,6 +374,9 @@ function App() {
               </div>
             </aside>
           </div>
+          <div className="scroll-indicator" aria-hidden="true">
+            <span />
+          </div>
         </section>
 
         <section className="credentials-strip" aria-label="Credenciais da Dra. Marta">
@@ -436,7 +394,7 @@ function App() {
           <div className="container about-grid">
             <div data-reveal>
               <span className="eyebrow">A protagonista do cuidado</span>
-              <h2>A experiência da Dra. Marta é o coração deste site.</h2>
+              <h2 className="decorated-title">A experiência da Dra. Marta é o coração deste site.</h2>
               <p className="lead">
                 Antes de qualquer protocolo, existe uma profissional que conduz o cuidado. A Dra. Marta é apresentada como referência: experiência clínica, formação acadêmica consistente, domínio da fisioterapia pélvica e comunicação leve para um tema que muitas pessoas ainda tratam com vergonha.
               </p>
@@ -482,7 +440,7 @@ function App() {
           <div className="container split-heading">
             <div data-reveal>
               <span className="eyebrow">Áreas de atuação</span>
-              <h2>Uma visão ampla da saúde pélvica feminina e masculina.</h2>
+              <h2 className="decorated-title">Uma visão ampla da saúde pélvica feminina e masculina.</h2>
             </div>
             <p data-reveal>
               A atuação da Dra. Marta vai além de um programa específico. Suas áreas de cuidado reforçam conhecimento, domínio clínico e experiência na saúde pélvica.
@@ -503,7 +461,7 @@ function App() {
           <div className="container approach-grid">
             <div data-reveal>
               <span className="eyebrow">Abordagem clínica</span>
-              <h2>O método começa pela pessoa, não pelo sintoma.</h2>
+              <h2 className="decorated-title">O método começa pela pessoa, não pelo sintoma.</h2>
               <p className="lead">
                 Perda urinária, urgência, noctúria ou insegurança na rotina não são tratados como uma queixa isolada.
                 A Dra. Marta avalia contexto, função muscular, hábitos, rotina e impacto emocional para construir um
@@ -546,7 +504,7 @@ function App() {
         <section id="plano" className="section program-section page-section">
           <div className="container program-hero" data-reveal>
             <span className="eyebrow">A cereja do bolo</span>
-            <h2>Plano Reconquiste o Controle</h2>
+            <h2 className="decorated-title">Plano Reconquiste o Controle</h2>
             <p>
               Depois de apresentar a Dra. Marta, sua experiência e seu conhecimento, o plano aparece como uma
               solução estruturada para controle urinário. Ele reúne avaliação, educação, recursos terapêuticos,
@@ -584,7 +542,7 @@ function App() {
           <div className="container timeline-grid">
             <div data-reveal>
               <span className="eyebrow">Ritmo do tratamento</span>
-              <h2>Uma evolução acompanhada, sem pressa artificial.</h2>
+              <h2 className="decorated-title">Uma evolução acompanhada, sem pressa artificial.</h2>
               <p>
                 Cada pessoa tem seu ritmo. A expectativa é comunicada com responsabilidade: constância, sessões, ajustes de rotina e evolução progressiva são mais importantes do que prometer resultado imediato.
               </p>
@@ -644,7 +602,7 @@ function App() {
           <div className="container contact-grid">
             <div data-reveal>
               <span className="eyebrow eyebrow-light">Agende sua avaliação</span>
-              <h2>Converse com quem tem experiência para orientar o seu caso.</h2>
+              <h2 className="decorated-title">Converse com quem tem experiência para orientar o seu caso.</h2>
               <p>
                 O contato final reforça a Dra. Marta como referência. O paciente não está “comprando um plano”; está
                 procurando uma profissional capaz de avaliar, explicar e conduzir o cuidado com segurança.
