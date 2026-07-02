@@ -183,8 +183,8 @@ function useRevealOnScroll() {
         });
       },
       {
-        threshold: 0.25,            // ← antes 0.14, agora exige 25% de visibilidade
-        rootMargin: '0px 0px -15% 0px', // ← antes -8%, agora reduz mais a área efetiva
+        threshold: 0.25,
+        rootMargin: '0px 0px -15% 0px',
       }
     );
 
@@ -200,28 +200,22 @@ function useActiveSection() {
   useEffect(() => {
     const sections = navItems
       .map((item) => document.querySelector(item.href))
-      .filter(Boolean);
+      .filter((el): el is Element => el !== null);
 
     const observer = new IntersectionObserver(
       (entries) => {
-        // Filtra apenas as seções que estão intersectando a área definida
         const intersecting = entries.filter((entry) => entry.isIntersecting);
 
         if (intersecting.length > 0) {
-          // Entre as que intersectam, escolhe a que tem o menor boundingClientRect.top
-          // (mais próxima do topo da viewport)
           const topMost = intersecting.reduce((prev, curr) =>
             prev.boundingClientRect.top < curr.boundingClientRect.top ? prev : curr
           );
           setActive(`#${topMost.target.id}`);
         }
-        // Se nenhuma intersectar, mantém o último ativo (ou poderia permanecer como está)
       },
       {
-        // Margem superior negativa para compensar o header fixo (~96px)
-        // Margem inferior para que a área de observação vá até 30% da viewport
         rootMargin: '-96px 0px -70% 0px',
-        threshold: 0, // Dispara com qualquer interseção, mesmo mínima
+        threshold: 0,
       }
     );
 
@@ -233,26 +227,27 @@ function useActiveSection() {
   return active;
 }
 
-function replaySectionReveal(href) {
-  const section = document.querySelector(href);
+function replaySectionReveal(href: string) {
+  const section = document.querySelector(href) as HTMLElement | null; // Cast para HTMLElement
   if (!section) return;
 
   section.classList.remove('section-transition');
-  void section.offsetWidth;
+  void section.offsetWidth; // Agora offsetWidth é reconhecido
   section.classList.add('section-transition');
 
-  const revealElements = Array.from(section.querySelectorAll('[data-reveal]'));
+  const revealElements = Array.from(
+    section.querySelectorAll('[data-reveal]')
+  ) as HTMLElement[]; // Cast para array de HTMLElement
 
   revealElements.forEach((element, index) => {
     element.classList.remove('is-visible', 'replay-reveal');
-    element.style.setProperty('--replay-delay', `${Math.min(index * 45, 260)}ms`);
+    element.style.setProperty('--replay-delay', `${Math.min(index * 45, 260)}ms`); // style é válido
     void element.offsetWidth;
     element.classList.add('is-visible', 'replay-reveal');
   });
 
   window.setTimeout(() => {
     section.classList.remove('section-transition');
-
     revealElements.forEach((element) => {
       element.classList.remove('replay-reveal');
       element.style.removeProperty('--replay-delay');
@@ -260,17 +255,18 @@ function replaySectionReveal(href) {
   }, 950);
 }
 
-function scrollToSection(href) {
+function scrollToSection(href: string) {
   const section = document.querySelector(href);
   if (!section) return;
 
-  const header = document.querySelector('.site-header');
+  const header = document.querySelector('.site-header') as HTMLElement | null;
   const headerOffset = header ? header.offsetHeight + 24 : 96;
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const sectionTop = section.getBoundingClientRect().top + window.scrollY;
   const targetTop = href === '#inicio'
     ? 0
     : Math.max(sectionTop - headerOffset + SECTION_TOP_PADDING, 0);
+
   const runTransition = () => replaySectionReveal(href);
 
   window.scrollTo({
@@ -300,7 +296,7 @@ function Header() {
   const [open, setOpen] = useState(false);
   const active = useActiveSection();
 
-  const handleClick = (event, href) => {
+  const handleClick = (event: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     event.preventDefault();
     scrollToSection(href);
     setOpen(false);
@@ -349,7 +345,14 @@ function Header() {
   );
 }
 
-function SectionTitle({ eyebrow, title, description, center = false }) {
+interface SectionTitleProps {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  center?: boolean;
+}
+
+function SectionTitle({ eyebrow, title, description, center = false }: SectionTitleProps) {
   return (
     <div className={`section-title ${center ? 'center' : ''}`} data-reveal>
       {eyebrow && <span className="eyebrow">{eyebrow}</span>}
@@ -359,7 +362,12 @@ function SectionTitle({ eyebrow, title, description, center = false }) {
   );
 }
 
-function WhatsAppButton({ children, variant = 'primary' }) {
+interface WhatsAppButtonProps {
+  children: React.ReactNode;
+  variant?: string;
+}
+
+function WhatsAppButton({ children, variant = 'primary' }: WhatsAppButtonProps) {
   return (
     <a
       className={`btn btn-${variant}`}
@@ -679,7 +687,7 @@ function App() {
               </label>
               <label>
                 Mensagem
-                <textarea rows="4" placeholder="Conte brevemente o que você procura" />
+                <textarea rows={4} placeholder="Conte brevemente o que você procura" />
               </label>
               <button className="btn btn-primary" type="submit">
                 Solicitar contato
