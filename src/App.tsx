@@ -11,9 +11,8 @@ const WHATSAPP_MESSAGE = encodeURIComponent(
 const navItems = [
   { label: 'Início', href: '#inicio' },
   { label: 'Dra. Marta', href: '#dra-marta' },
-  { label: 'Conhecimento', href: '#conhecimento' },
-  { label: 'Abordagem', href: '#abordagem' },
-  { label: 'Plano', href: '#plano' },
+  { label: 'Como posso ajudar', href: '#como-posso-ajudar' },
+  { label: 'Programa', href: '#plano' },
   { label: 'Contato', href: '#contato' },
 ];
 
@@ -34,20 +33,53 @@ const credentials = [
 
 const expertiseAreas = [
   {
-    title: 'Saúde pélvica feminina',
-    text: 'Atenção a perdas urinárias, urgência miccional, noctúria, sintomas mistos, menopausa, pós-parto e fortalecimento do assoalho pélvico.',
+    icon: '♀',
+    title: 'Saúde Pélvica Feminina',
+    subtitle:
+      'Tratamento especializado para as principais disfunções do assoalho pélvico feminino, com foco em funcionalidade, autonomia e qualidade de vida.',
+    items: [
+      'Incontinência urinária de esforço e/ou urgência',
+      'Síndrome Geniturinária da Menopausa',
+      'Prolapsos pélvicos de bexiga, útero e/ou reto',
+      'Medição, adaptação e acompanhamento do uso de pessário',
+      'Constipação intestinal',
+      'Anismo',
+      'Incontinência fecal',
+      'Pré e pós-operatório de endometriose',
+      'Dor pélvica crônica',
+      'Transtornos sexuais relacionados à dor',
+      'Acompanhamento pré e pós-parto',
+    ],
   },
   {
-    title: 'Saúde pélvica masculina',
-    text: 'Cuidado para homens com perda urinária após cirurgia da próstata, preparo pré-cirúrgico, envelhecimento, bexiga hiperativa e impacto na rotina.',
+    icon: '♂',
+    title: 'Saúde Pélvica Masculina',
+    subtitle:
+      'Acompanhamento fisioterapêutico para homens em diferentes fases do cuidado urológico, intestinal e da saúde pélvica.',
+    items: [
+      'Pré e pós-operatório de cirurgia da próstata',
+      'Bexiga hiperativa',
+      'Dor pélvica crônica',
+      'Constipação intestinal',
+      'Anismo',
+      'Incontinência fecal',
+    ],
   },
   {
-    title: 'Reabilitação da continência',
-    text: 'Treino muscular, uroterapia, educação corporal, diário miccional, biofeedback, eletroestimulação e progressão funcional.',
-  },
-  {
-    title: 'Visão integrada do paciente',
-    text: 'Análise da rotina, hábitos, sono, intestino, hidratação, histórico clínico, emocional e objetivos pessoais antes de definir a conduta.',
+    icon: '✦',
+    title: 'Saúde Pélvica Infantil',
+    subtitle:
+      'Tratamento humanizado das principais alterações urinárias e intestinais da infância, com orientação à criança e à família.',
+    items: [
+      'Disfunções miccionais',
+      'Enurese — xixi na cama durante o sono',
+      'Escapes urinários diurnos',
+      'Infecções urinárias de repetição',
+      'Constipação intestinal',
+      'Anismo',
+      'Escapes fecais',
+      'Incontinência fecal',
+    ],
   },
 ];
 
@@ -59,13 +91,13 @@ const knowledgeCards = [
   },
   {
     number: '02',
-    title: 'Incontinência urinária feminina',
-    text: 'Perdas aos esforços, urgência para urinar, escapes antes de chegar ao banheiro, noctúria e quadros mistos são avaliados de forma individualizada.',
+    title: 'Reabilitação pélvica',
+    text: 'Treino muscular, uroterapia, educação corporal, diário miccional, biofeedback, eletroestimulação e progressão funcional.',
   },
   {
     number: '03',
-    title: 'Incontinência urinária masculina',
-    text: 'Atuação em casos de pós-operatório de próstata, preparo antes da cirurgia, perda de força com o envelhecimento e bexiga hiperativa.',
+    title: 'Visão integrada do paciente',
+    text: 'Análise da rotina, hábitos, sono, intestino, hidratação, histórico clínico, emocional e objetivos pessoais antes de definir a conduta.',
   },
   {
     number: '04',
@@ -84,7 +116,7 @@ const approachSteps = [
     text: 'A avaliação identifica força, coordenação, resistência, hábitos urinários e fatores que podem irritar a bexiga ou sobrecarregar a pelve.',
   },
   {
-    title: 'Plano individual',
+    title: 'Programa individual',
     text: 'A conduta é construída de acordo com a causa, a gravidade, o momento de vida e a capacidade de adesão ao tratamento.',
   },
   {
@@ -107,23 +139,23 @@ const conditions = [
 const programPillars = [
   {
     title: 'Avaliação e diagnóstico funcional',
-    text: 'Histórico, sintomas, diário miccional, avaliação muscular e instrumentos para acompanhar evolução.',
+    text: 'História clínica, sintomas, avaliação muscular, diário miccional e exames de Eletromiografia dos músculos do assoalho pélvico.',
   },
   {
-    title: 'Exercícios do assoalho pélvico',
-    text: 'Treino para encontrar o músculo certo, contrair e relaxar corretamente e criar uma rotina segura.',
+    title: 'Treinamento dos músculos do assoalho pélvico',
+    text: 'Concientização e percepção da musculatura pélvica; ganho de força, potência e resistência dos músculos do assoalho pélvico.',
   },
   {
     title: 'Biofeedback eletromiográfico',
-    text: 'Recurso para visualizar a contração, confirmar se o músculo certo está sendo ativado e potencializar o aprendizado.',
+    text: 'Recurso para visualizar a contração, confirmar se o músculo certo está sendo ativado e potencializar o aprendizado da contração e do relaxamento dos músculos do assoalho pélvico.',
   },
   {
     title: 'Eletroestimulação e neuromodulação',
     text: 'Ferramentas complementares quando há musculatura muito fraca ou bexiga hiperativa, sempre conforme avaliação.',
   },
   {
-    title: 'Progressão funcional',
-    text: 'Evolução para situações reais: tossir, espirrar, levantar peso, caminhar, subir escadas e retomar atividades.',
+    title: 'Sinésioterapia funcional integrativa',
+    text: 'O objetvo é integrar o diafrágma respiratório, músculos abdominais e do assoalho pélvico, no sentido de gerar perfeita funcionalidade do trato urinário e intestinal.',
   },
   {
     title: 'Acompanhamento e material educativo',
@@ -139,7 +171,7 @@ const timeline = [
 ];
 
 const habits = [
-  ['Hidratação adequada', 'Beber pouca água pode piorar a irritação da bexiga.'],
+  ['Hidratação adequada', 'Beber pouca água pode piorar a irritação da bexiga e beber muita água pode gerar aumento da frequência urinária tanto de dia quanto à noite'],
   ['Menos irritantes vesicais', 'Café, álcool e refrigerantes podem aumentar urgência em algumas pessoas.'],
   ['Intestino funcionando bem', 'A constipação sobrecarrega o assoalho pélvico e pode piorar sintomas.'],
   ['Exercícios com constância', 'A regularidade costuma importar mais do que a intensidade.'],
@@ -152,19 +184,19 @@ const faqs = [
       'O foco principal é a Dra. Marta: sua experiência, formação, conhecimento e forma de cuidar. O programa aparece como uma solução estruturada criada a partir dessa experiência.',
   },
   {
-    question: 'A fisioterapia pélvica atende homens e mulheres?',
+    question: 'A fisioterapia pélvica atende homens, mulheres e crianças?',
     answer:
-      'Sim. A atuação contempla diferentes situações da saúde feminina e masculina, sempre com avaliação individualizada.',
+      'Sim. A atuação contempla diferentes situações da saúde feminina, masculina e infantil sempre com avaliação individualizada.',
   },
   {
-    question: 'O Plano Reconquiste o Controle substitui uma consulta?',
+    question: 'O Programa Reconquiste o Controle substitui uma consulta?',
     answer:
-      'Não. O plano começa com avaliação profissional. A partir dela, a Dra. Marta define as estratégias mais adequadas para cada caso.',
+      'Não. O programa começa com avaliação profissional. A partir dela, a Dra. Marta define as estratégias mais adequadas para cada caso.',
   },
   {
     question: 'É possível melhorar a perda urinária sem cirurgia?',
     answer:
-      'Em muitos casos, a fisioterapia pélvica é uma abordagem conservadora importante, com exercícios, educação, recursos complementares e acompanhamento. A indicação depende da avaliação.',
+      'A Fisioterapia Pélvica é considerada o tratamento de primeira linha para todos os tipos de incontinência e distúrbios dolorosos na pélvis (nível de evidência 1A [ICS/EAU]).',
   },
 ];
 
@@ -350,7 +382,7 @@ function App() {
           <div className="container hero-grid">
             <div className="hero-copy" data-reveal>
               <span className="hero-kicker">Dra. Marta Rizzini · Fisioterapia Pélvica</span>
-              <h1>Experiência, ciência e acolhimento no cuidado da saúde pélvica.</h1>
+              <h1>Experiência, ciência e acolhimento no cuidado da saúde pélvica</h1>
               <p>
                 Um cuidado centrado na trajetória, na formação e na forma de conduzir cada paciente com discrição, segurança, acolhimento e clareza.
               </p>
@@ -370,7 +402,7 @@ function App() {
               <div className="portrait-content">
                 <span>Especialista em cuidado pélvico</span>
                 <strong>Dra. Marta Rizzini</strong>
-                <p>Mais de três décadas dedicadas à fisioterapia pélvica, unindo conhecimento técnico e atendimento acolhedor.</p>
+                <p>Mais de três décadas dedicadas à fisioterapia pélvica, unindo conhecimento científico e atendimento acolhedor.</p>
               </div>
             </aside>
           </div>
@@ -394,12 +426,12 @@ function App() {
           <div className="container about-grid">
             <div data-reveal>
               <span className="eyebrow">A protagonista do cuidado</span>
-              <h2 className="decorated-title">A experiência da Dra. Marta é o coração deste site.</h2>
+              <h2 className="decorated-title">A experiência da Dra. Marta é o coração deste site</h2>
               <p className="lead">
-                Antes de qualquer protocolo, existe uma profissional que conduz o cuidado. A Dra. Marta é apresentada como referência: experiência clínica, formação acadêmica consistente, domínio da fisioterapia pélvica e comunicação leve para um tema que muitas pessoas ainda tratam com vergonha.
+                Antes de qualquer protocolo, existe uma profissional que conduz o cuidado. A Dra. Marta é apresentada como referência: experiência clínica, formação acadêmica consistente, domínio da fisioterapia pélvica e comunicação leve para temas que são sentidos como vergonha e insegurança.
               </p>
               <p>
-                Sua atuação une conhecimento, escuta e direção clínica. O plano de controle urinário aparece como uma solução especial criada a partir dessa bagagem profissional.
+                Sua atuação une conhecimento, escuta e direção clínica. O programa de controle urinário e das disfunções dolorosas na pélvis aparece como uma solução especial criada a partir dessa bagagem profissional.
               </p>
             </div>
 
@@ -419,7 +451,7 @@ function App() {
           <div className="container">
             <SectionTitle
               eyebrow="Conhecimento aplicado à prática"
-              title="O que sustenta a autoridade da Dra. Marta"
+              title="É o que sustenta a autoridade da Dra. Marta"
               description="A formação e a experiência ganham força quando são traduzidas em cuidado prático, linguagem clara e condutas personalizadas."
               center
             />
@@ -436,24 +468,45 @@ function App() {
           </div>
         </section>
 
-        <section className="section expertise-section">
-          <div className="container split-heading">
-            <div data-reveal>
-              <span className="eyebrow">Áreas de atuação</span>
-              <h2 className="decorated-title">Uma visão ampla da saúde pélvica feminina e masculina.</h2>
-            </div>
-            <p data-reveal>
-              A atuação da Dra. Marta vai além de um programa específico. Suas áreas de cuidado reforçam conhecimento, domínio clínico e experiência na saúde pélvica.
-            </p>
-          </div>
+        <section id="como-posso-ajudar" className="section expertise-section page-section">
+          <div className="container">
+            <SectionTitle
+              eyebrow="Áreas de atuação"
+              title="Como posso ajudar você?"
+              description="A fisioterapia pélvica atua em diferentes fases da vida. A Dra. Marta oferece avaliação individualizada e tratamento baseado em evidências para mulheres, homens e crianças."
+              center
+            />
 
-          <div className="container expertise-grid">
-            {expertiseAreas.map((area) => (
-              <article className="expertise-card" key={area.title} data-reveal>
-                <h3>{area.title}</h3>
-                <p>{area.text}</p>
-              </article>
-            ))}
+            <div className="expertise-grid">
+              {expertiseAreas.map((area, areaIndex) => (
+                <article
+                  className="expertise-card"
+                  key={area.title}
+                  data-reveal
+                  style={{ '--expertise-delay': `${areaIndex * 90}ms` } as React.CSSProperties}
+                >
+                  <div className="expertise-card-header">
+                    <span className="expertise-icon" aria-hidden="true">{area.icon}</span>
+                    <div>
+                      <h3>{area.title}</h3>
+                      <p>{area.subtitle}</p>
+                    </div>
+                  </div>
+
+                  <ul className="expertise-list">
+                    {area.items.map((item, itemIndex) => (
+                      <li
+                        key={item}
+                        style={{ '--item-delay': `${itemIndex * 45}ms` } as React.CSSProperties}
+                      >
+                        <span className="expertise-check" aria-hidden="true">✓</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -461,7 +514,7 @@ function App() {
           <div className="container approach-grid">
             <div data-reveal>
               <span className="eyebrow">Abordagem clínica</span>
-              <h2 className="decorated-title">O método começa pela pessoa, não pelo sintoma.</h2>
+              <h2 className="decorated-title">O método começa pela pessoa, não pelo sintoma</h2>
               <p className="lead">
                 Perda urinária, urgência, noctúria ou insegurança na rotina não são tratados como uma queixa isolada.
                 A Dra. Marta avalia contexto, função muscular, hábitos, rotina e impacto emocional para construir um
@@ -495,7 +548,7 @@ function App() {
           <div className="container quote-card" data-reveal>
             <span className="eyebrow">Mensagem central</span>
             <blockquote>
-              “Você não precisa conviver com a perda urinária em silêncio. O primeiro passo é compreender o que está
+              “Você não precisa conviver com a perda urinária e/ou dores pélvicas em silêncio. O primeiro passo é compreender o que está
               acontecendo e procurar uma avaliação conduzida com técnica, respeito e acolhimento.”
             </blockquote>
           </div>
@@ -504,17 +557,16 @@ function App() {
         <section id="plano" className="section program-section page-section">
           <div className="container program-hero" data-reveal>
             <span className="eyebrow">A cereja do bolo</span>
-            <h2 className="decorated-title">Plano Reconquiste o Controle</h2>
+            <h2 className="decorated-title">Programa Reconquiste o Controle</h2>
             <p>
-              Depois de apresentar a Dra. Marta, sua experiência e seu conhecimento, o plano aparece como uma
-              solução estruturada para controle urinário. Ele reúne avaliação, educação, recursos terapêuticos,
-              acompanhamento e progressão para a rotina.
+              O programa aparece como uma solução estruturada para o controle da bexiga, do intestino e das dores pélvicas. 
+              Ele reúne avaliação, educação, recursos terapêuticos, acompanhamento e progressão para a rotina.
             </p>
           </div>
 
           <div className="container program-layout">
             <div className="program-main">
-              <h3>O que o plano organiza</h3>
+              <h3>O que o programa organiza</h3>
               <div className="program-pillars">
                 {programPillars.map((pillar) => (
                   <article className="program-pillar" key={pillar.title} data-reveal>
@@ -533,7 +585,7 @@ function App() {
                 <li>Homens com perda urinária após cirurgia de próstata.</li>
                 <li>Homens em preparo pré-cirúrgico ou com perda de força associada ao envelhecimento.</li>
               </ul>
-              <WhatsAppButton variant="light">Tenho interesse no plano</WhatsAppButton>
+              <WhatsAppButton variant="light">Tenho interesse no programa</WhatsAppButton>
             </aside>
           </div>
         </section>
@@ -542,7 +594,7 @@ function App() {
           <div className="container timeline-grid">
             <div data-reveal>
               <span className="eyebrow">Ritmo do tratamento</span>
-              <h2 className="decorated-title">Uma evolução acompanhada, sem pressa artificial.</h2>
+              <h2 className="decorated-title">Uma evolução acompanhada, sem pressa e com resultados reais</h2>
               <p>
                 Cada pessoa tem seu ritmo. A expectativa é comunicada com responsabilidade: constância, sessões, ajustes de rotina e evolução progressiva são mais importantes do que prometer resultado imediato.
               </p>
@@ -564,7 +616,7 @@ function App() {
             <SectionTitle
               eyebrow="Educação em saúde"
               title="Pequenas orientações que reforçam o cuidado"
-              description="Conteúdos educativos simples ajudam o paciente a entender melhor o próprio corpo e chegar mais seguro à avaliação."
+              description="Conteúdos educativos simples ajudam o paciente a entender melhor o próprio corpo e melhorar sua qualidade de vida."
               center
             />
 
@@ -604,7 +656,7 @@ function App() {
               <span className="eyebrow eyebrow-light">Agende sua avaliação</span>
               <h2 className="decorated-title">Converse com quem tem experiência para orientar o seu caso.</h2>
               <p>
-                O contato final reforça a Dra. Marta como referência. O paciente não está “comprando um plano”; está
+                O contato final reforça a Dra. Marta como referência. O paciente não está “comprando um programa; está
                 procurando uma profissional capaz de avaliar, explicar e conduzir o cuidado com segurança.
               </p>
               <div className="contact-actions">
@@ -639,7 +691,7 @@ function App() {
                   </option>
                   <option>Conhecer a Dra. Marta</option>
                   <option>Agendar avaliação</option>
-                  <option>Plano Reconquiste o Controle</option>
+                  <option>Programa Reconquiste o Controle</option>
                   <option>Tirar uma dúvida</option>
                 </select>
               </label>
@@ -661,6 +713,7 @@ function App() {
           <div>
             <strong>Dra. Marta Rizzini</strong>
             <span>Fisioterapia Pélvica</span>
+            <span>CREFITO - 3843-F</span>
           </div>
           <p>© {currentYear}. Conteúdo informativo. Não substitui avaliação profissional individualizada.</p>
         </div>
